@@ -1,21 +1,14 @@
 class Solution {
     fun isPalindrome(s: String): Boolean {
-
+        if(s.length == 0 || s.length == 1) return true
+        val  newStr = s.filter{it.isLetterOrDigit()}.lowercase()
         var front = 0
-        var rear = s.length-1
+        var rear = newStr.length -1
         while(front<rear){
-            if(!s[front].isLetterOrDigit()){
+            if(newStr[front] == newStr[rear]){
                 front++
-            }else if(!s[rear].isLetterOrDigit()){
                 rear--
-            }else{
-                if(s[front].lowercase() == s[rear].lowercase()){
-                    front++
-                    rear--
-                }else{
-                    return false
-                }
-            }
+            }else return false
         }
         return true
     }
