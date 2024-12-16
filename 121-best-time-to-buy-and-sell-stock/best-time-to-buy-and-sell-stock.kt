@@ -3,10 +3,9 @@ class Solution {
         var buy = prices[0];
         var profit = 0
         for(i in prices){
-            profit = Math.max(profit,i-buy)
-            if(i<buy){
-                buy = i
-            }
+             if(i<buy) buy = i
+             else profit = maxOf(profit,i-buy)
+           
         } 
         return profit
     }
