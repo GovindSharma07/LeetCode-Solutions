@@ -1,21 +1,24 @@
 class Solution {
+    val stack = Stack<Char>()
     fun isValid(s: String): Boolean {
-        if(s.length % 2 != 0) return false
-
-        var bucket : MutableList<Char> = mutableListOf()
-        for(i in s){
-           if(i == '(' || i == '{' || i == '['){
-            bucket.add(i)
-           }
-           else{try{
-            if((i == ')' && bucket.last() == '(') || (i == ']' && bucket.last() == '[') || (i == '}' && bucket.last() == '{')) bucket.removeLast()
-            else return false}
-            catch(e : Exception){
-                return false
+        for(c in s.toCharArray()) {
+            if(c == '(' || c == '{' || c == '[') {
+                stack.push(c)    
             }
-           }
+            else {
+                if(stack.isEmpty()) return false
+                val char = stack.pop()
+                if((c == '}' && char == '{') || 
+                   (c == ')' && char == '(') || 
+                   (c == ']' && char =='[')) {
+                    continue
+                   } 
+                 else { 
+                    return false
+                    }
+            }
         }
-        if(bucket.size == 0) return true
-        else return false
+
+        return stack.isEmpty()
     }
 }
