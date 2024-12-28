@@ -1,24 +1,16 @@
 class Solution {
     fun summaryRanges(nums: IntArray): List<String> {
-        if(nums.size == 0) return  listOf()
-        if(nums.size == 1) return listOf(nums[0].toString())
+        val result = mutableListOf<String>()
 
-        var ans : MutableList<String> = mutableListOf()
-        var s = nums[0].toString()
-        for(i in 1 until nums.size){
-            if(nums[i] - nums[i-1] == 1){
-                if(s.contains("->")) continue
-                else s = s + "->"
-            }
-            else{
-                if(s.contains("->")) s = s + nums[i-1].toString()
-                ans.add(s)
-                s = nums[i].toString()
-            }
+        var i = 0
+        while (i < nums.size) {
+            var start = nums[i]
+            while (i < nums.size - 1 && nums[i + 1] == nums[i] + 1) i++
+            if (start == nums[i]) result.add("$start")
+            if (start != nums[i]) result.add("$start->${nums[i]}")
+            i++
         }
 
-        if(s.contains("->")) s = s + nums.last().toString()
-        ans.add(s)
-        return ans
+        return result
     }
 }
