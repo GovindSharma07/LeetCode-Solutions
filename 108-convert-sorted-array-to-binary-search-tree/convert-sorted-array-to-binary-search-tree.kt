@@ -1,23 +1,11 @@
-/**
- * Example:
- * var ti = TreeNode(5)
- * var v = ti.`val`
- * Definition for a binary tree node.
- * class TreeNode(var `val`: Int) {
- *     var left: TreeNode? = null
- *     var right: TreeNode? = null
- * }
- */
 class Solution {
-    fun sortedArrayToBST(nums: IntArray): TreeNode? {
-        if (nums.isEmpty()) return null
+        fun sortedArrayToBST(nums: IntArray, low: Int = 0, high: Int = nums.size - 1): TreeNode? {
+        if (low > high) return null
 
-        val root = TreeNode(nums[nums.size/2])
-
-        // Use sliceArray for array subranges
-        root.left = sortedArrayToBST(nums.sliceArray(0 until nums.size/2))
-        root.right = sortedArrayToBST(nums.sliceArray(nums.size/2 + 1 until nums.size))
-        
-        return root
+        val mid = (high + low) / 2
+        return TreeNode(nums[mid]).apply{
+            left = sortedArrayToBST(nums, low, mid - 1)
+            right = sortedArrayToBST(nums, mid + 1, high)
+        }
     }
 }
