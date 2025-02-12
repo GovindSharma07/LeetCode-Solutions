@@ -1,12 +1,12 @@
 class Solution {
     fun removeElement(nums: IntArray, `val`: Int): Int {
-        var index = 0
-        for( i in nums){
+        var k = 0
+        for(i in nums){
             if(i != `val`){
-                nums[index] = i;
-                index++
+                nums[k] = i
+                k++
             }
         }
-        return index
+        return k
     }
 }
