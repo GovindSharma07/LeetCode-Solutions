@@ -1,26 +1,16 @@
 class Solution {
-    fun rotate(nums: IntArray, k: Int): Unit {
-        if(k%nums.size == 0) return
+    fun rotate(nums: IntArray, k: Int) {
+        val n = nums.size
+        val rotations = k % n // Handle cases where k > n
 
-        val size = nums.size
-        val a = k%size
+        if (rotations == 0) return // No rotation needed
 
-        for(i in 0..<size/2){
-            nums[i] = nums[i] + nums[size-i-1]
-            nums[size-i-1] =  nums[i] - nums[size-i-1]
-            nums[i] =  nums[i] - nums[size-i-1]
+        val temp = nums.copyOfRange(n - rotations, n) // Store the last 'rotations' elements
+        for (i in n - 1 downTo rotations) {
+            nums[i] = nums[i - rotations] // Shift the first (n - rotations) elements to the right
         }
-
-        for(i in 0..<a/2){
-             nums[i] = nums[i] + nums[a-i-1]
-            nums[a-i-1] =  nums[i] - nums[a-i-1]
-            nums[i] =  nums[i] - nums[a-i-1]
-        }
-
-         for(i in a..<(size+a)/2){
-            nums[i] = nums[i] + nums[size+a-i-1]
-            nums[size+a-i-1] =  nums[i] - nums[size+a-i-1]
-            nums[i] =  nums[i] - nums[size+a-i-1]
+        for (i in 0 until rotations) {
+            nums[i] = temp[i] // Place the stored last 'rotations' elements at the beginning
         }
     }
 }
