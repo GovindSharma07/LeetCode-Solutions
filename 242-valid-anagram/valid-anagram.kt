@@ -1,22 +1,21 @@
 class Solution {
-fun isAnagram(s: String, t: String): Boolean {
-    if (s.length != t.length) return false
+    fun isAnagram(s: String, t: String): Boolean {
+        if(s.length != t.length) return false
+        
+        val map = mutableMapOf<Char,Int>()
 
-    var tChar = t.toCharArray()
-    var cChar = s.toCharArray()
-    var countArr = IntArray(26)
 
-    for (i in cChar) {
-        countArr[i - 'a']++
+        for(i in s){
+            map[i] = map.getOrDefault(i,0) + 1
+        }
+
+         for(i in t){
+            map[i] = map.getOrDefault(i,0) - 1
+        }
+
+        for(i in map.values) if (i != 0) return false
+        return true
+
+
     }
-
-    for (i in tChar) {
-        countArr[i - 'a']--
-    }
-
-    for (i in countArr) {
-        if (i > 0) return false
-    }
-    return true
-}
 }
