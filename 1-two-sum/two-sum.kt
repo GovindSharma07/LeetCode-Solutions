@@ -1,12 +1,10 @@
 class Solution {
     fun twoSum(nums: IntArray, target: Int): IntArray {
-        var map :HashMap<Int,Int> = HashMap<Int,Int>()
-
+        val a = mutableMapOf<Int,Int>()
         for(i in 0 until nums.size){
-            if(map.get(target-nums[i]) != null) return intArrayOf(map.get(target-nums[i]) as Int,i)
-            else map.put(nums[i],i)
+            if(a[target-nums[i]] == null) a[nums[i]] = i
+            else return intArrayOf(a.getOrDefault(target-nums[i],0),i)
         }
-
-        return intArrayOf(0,0)
+        return intArrayOf(-1,-1)
     }
 }
