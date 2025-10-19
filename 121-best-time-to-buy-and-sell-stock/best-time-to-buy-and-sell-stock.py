@@ -9,7 +9,7 @@ class Solution(object):
         for price in prices:
             if price<buy:
                 buy = price
-            else:
-                profit = max(profit,price- buy)
+            elif (price-buy)>profit:
+                profit = price-buy
         return profit
         
