@@ -7,9 +7,6 @@ class Solution(object):
         """
         group = defaultdict(list)
         for i in strs:
-            c = Counter(i)
-            a = [0]*26
-            for value,freq in c.items():
-                a[ord(value) - ord("a")] = freq
-            group[tuple(a)].append(i)
+            key = tuple(sorted(Counter(i).items()))
+            group[key].append(i)
         return [i for i in group.values()]
