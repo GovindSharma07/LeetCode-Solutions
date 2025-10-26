@@ -7,8 +7,9 @@ class Solution(object):
         """
         check = {}
         for i in range(len(nums)):
-            if check.get(target - nums[i]) == None:
-                check[nums[i]] = i
-            else:
+            if target - nums[i] in check:
                 return [check[target-nums[i]],i]
+            else:
+                check[nums[i]] = i
+            
         
