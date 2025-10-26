@@ -1,12 +1,21 @@
-from collections import Counter
-class Solution(object):
+from collections import defaultdict
+
+class Solution:
     def groupAnagrams(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: List[List[str]]
-        """
-        group = defaultdict(list)
-        for i in strs:
-            key = tuple(sorted(Counter(i).items()))
-            group[key].append(i)
-        return [i for i in group.values()]
+        groups = defaultdict(list)
+        
+        for s in strs:
+            # Create a fixed-size list for a-z counts (O(1) initialization)
+            counts = [0] * 26
+            
+            # Populate the counts (O(L) time)
+            for char in s:
+                # Assuming lowercase English letters constraint
+                index = ord(char) - ord('a')
+                counts[index] += 1
+            
+            # Use the count tuple as the dictionary key (O(1) creation)
+            key = tuple(counts)
+            groups[key].append(s)
+            
+        return list(groups.values())
